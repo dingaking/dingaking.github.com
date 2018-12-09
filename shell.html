@@ -16,7 +16,7 @@
         <div class="wrapper">
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <h3>NodeJS</h3>
+                    <h3>Shell</h3>
                 </div>
                 
                 <ul class="list-unstyled components">
@@ -86,44 +86,31 @@
                     </div>
                 </nav>
     
-                <h2>CentOS 몽고DB 설치</h2>
-                <p># yum install mongodb mongodb-server</p>
-                <p># service mongod status</p>
-                <p># service mongod start</p>
-                <p># mongo --version</p>
-                <p># mongo</p>
-                <p>> show dbs</p>
-                <p>> exit</p>
-                <p>default directory => /var/lib/mongodb/</p>
-                <p>변경 # mongod --dbpath /usr/local/mongodb-data</p>
+                <h2>리눅스 배포판 확인</h2>
+                <p># grep . /etc/*-release</p>
     
-                <h2>CentOS Node.js 설치</h2>
-                <p># yum install npm</p>
+                <div class="line"></div>
+    
+                <h2>열린 포트 확인</h2>
+                <p># sudo netstat -tnlp</p>
+                <p># sudo iptables -I INPUT 1 -p tcp --dport 3000 -j ACCEPT</p>
+                <p># sudo service iptables save</p>
+                <p># sudo /etc/init.d/iptables restart</p>
+                <p>=> 직접확인 sudo vi /etc/sysconfig/iptables</p>
     
                 <div class="line"></div>
 
-                <h2>Ubuntu 몽고DB 설치</h2>
-                <p># sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4</p>
-                <p># echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list</p>
-                <p># sudo cd /usr/lib/apt/methods</p>
-                <p># sudo ln -s http https</p>
-                <p># sudo apt-get update</p>
-                <p># sudo apt-get install -y mongodb-org</p>
-                <p># sudo apt-get install mongodb</p>
-                <p># sudo mkdir -p /data/db</p>
-                <p># service mongodb status</p>
-                <p># sudo service mongodb start</p>
-                <p># service mongodb status</p>
-                <p># mongo --version</p>
-                <p># mongo</p>
-                <p>> show dbs</p>
-                <p>> exit</p>
-
-                <h2>Ubuntu Node.js 설치</h2>
-                <p># sudo apt-get install curl</p>
-                <p># curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -</p>
-                <p># sudo apt-get install -y nodejs</p>
+                <h2>bitbucket SSH key 등록하기</h2>
+                <p># apt-get -y install openssh-client</p>
+                <p># ssh-keygen</p>
+                <p># cat ~/.ssh/id_rsa.pub</p>
+                <p># bitbucket settings > SSH keys > add key</p>
+                <p># </p>
+                <p># </p>
+                <p># </p>
+                <p># </p>
                 
+
             </div>
         </div>
     

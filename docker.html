@@ -16,7 +16,7 @@
         <div class="wrapper">
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <h3>NodeJS</h3>
+                    <h3>Docker</h3>
                 </div>
                 
                 <ul class="list-unstyled components">
@@ -86,43 +86,44 @@
                     </div>
                 </nav>
     
-                <h2>CentOS 몽고DB 설치</h2>
-                <p># yum install mongodb mongodb-server</p>
-                <p># service mongod status</p>
-                <p># service mongod start</p>
-                <p># mongo --version</p>
-                <p># mongo</p>
-                <p>> show dbs</p>
-                <p>> exit</p>
-                <p>default directory => /var/lib/mongodb/</p>
-                <p>변경 # mongod --dbpath /usr/local/mongodb-data</p>
-    
-                <h2>CentOS Node.js 설치</h2>
-                <p># yum install npm</p>
+                <h2>설치</h2>
+                <p># curl -fsSL https://get.docker.com/ | sudo sh</p>
+                <p># docker version</p>
     
                 <div class="line"></div>
+    
+                <h2>이미지 조회</h2>
+                <p># sudo docker images</p>
 
-                <h2>Ubuntu 몽고DB 설치</h2>
-                <p># sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4</p>
-                <p># echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list</p>
-                <p># sudo cd /usr/lib/apt/methods</p>
-                <p># sudo ln -s http https</p>
-                <p># sudo apt-get update</p>
-                <p># sudo apt-get install -y mongodb-org</p>
-                <p># sudo apt-get install mongodb</p>
-                <p># sudo mkdir -p /data/db</p>
-                <p># service mongodb status</p>
-                <p># sudo service mongodb start</p>
-                <p># service mongodb status</p>
-                <p># mongo --version</p>
-                <p># mongo</p>
-                <p>> show dbs</p>
-                <p>> exit</p>
+                <h2>컨테이너 조회</h2>
+                <p># sudo docker ps -a</p>
 
-                <h2>Ubuntu Node.js 설치</h2>
-                <p># sudo apt-get install curl</p>
-                <p># curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -</p>
-                <p># sudo apt-get install -y nodejs</p>
+                <h2>우분투 최신 이미지 가져오기</h2>
+                <p># sudo docker pull ubuntu:latest</p>
+
+                <h2>컨테이너 생성</h2>
+                <p># sudo docker run -i -t --name container-name ubuntu:latest /bin/bash</p>
+                
+                <h2>컨테이너 시작</h2>
+                <p># sudo docker start ubuntu:14.04</p>
+
+                <h2>컨테이너 이름 변경</h2>
+                <p># sudo docker rename hello nodejs</p>
+
+                <h2>시작된 컨테이너에 접속</h2>
+                <p># sudo docker attach nodejs</p>
+                
+                <h2>외부에서 컨테이너의 명령을 실행</h2>
+                <p># sudo docker exec nodejs date</p>
+
+                <h2>컨테이너 정지</h2>
+                <p># sudo docker stop nodejs</p>
+
+                <h2>컨테이너 삭제</h2>
+                <p># sudo docker rm nodejs</p>
+
+                <h2>이미지 삭제</h2>
+                <p># sudo docker rmi ubuntu:latest</p>
                 
             </div>
         </div>
