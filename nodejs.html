@@ -9,6 +9,7 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <!-- Custom styles for this template -->
         <link href="css/sidebar.css" rel="stylesheet">
+        <link href="css/code-example.css" rel="stylesheet">
 
         <title>Development Diary</title>
     </head>
@@ -123,7 +124,42 @@
                 <p># sudo apt-get install curl</p>
                 <p># curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -</p>
                 <p># sudo apt-get install -y nodejs</p>
-                
+
+                <div class="line"></div>
+
+                <h2>Route로 기능 분리</h2>
+                <div class="bd-example">
+                    app.js
+                </div>
+                <div class="highlight">
+<pre>
+var auth = require('./router/auth');
+app.use('/auth', auth);
+</pre>
+                </div>
+                <div class="bd-example">
+                        auth.js
+                    </div>
+                    <div class="highlight">
+<pre>
+var express = require('express');
+var router = express.Router();
+
+/**
+    * 1. 입력값 무결성 체크
+    * 2. DB insert or update
+    * 3. send email
+    */
+router.post('/createNotApprovedUser', function(req, res) {
+
+});
+
+module.exports = router;
+</pre>
+                    </div>
+    
+
+                <p></p>
             </div>
         </div>
     
