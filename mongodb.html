@@ -16,7 +16,7 @@
         <div class="wrapper">
             <nav id="sidebar">
                 <div class="sidebar-header">
-                    <h3>Docker</h3>
+                    <h3>MongoDB</h3>
                 </div>
                 
                 <ul class="list-unstyled components">
@@ -69,7 +69,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="nodejs.html">Node.js</a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item active">
                                     <a class="nav-link" href="mongodb.html">MongoDB</a>
                                 </li>
                                 <li class="nav-item">
@@ -78,7 +78,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="shell.html">Shell</a>
                                 </li>
-                                <li class="nav-item active">
+                                <li class="nav-item">
                                     <a class="nav-link" href="docker.html">Docker</a>
                                 </li>
                             </ul>
@@ -86,47 +86,40 @@
                     </div>
                 </nav>
     
-                <h2>설치</h2>
-                <p># curl -fsSL https://get.docker.com/ | sudo sh</p>
-                <p># docker version</p>
-    
+                <h2>DB 생성</h2>
+                <p>> show dbs</p>
+                <p>> use db_name</p>
+                <p>> db.dropDatabase();</p>
+
+                <h2>Document 추가</h2>
+
+                <p>> db.user.insert({"email":"dingaking@gmail.com", "status":"notactived", "pw":"", "nickname":"dingaking"});</p>
+                <p>> db.user.insert({"email":"jungtek.hwang@gmail.com", "status":"notactived", "pw":"", "nickname":"jungtek.hwang"});</p>
+                <p>> db.user.insert({"email":"dingaking@gmail.com","status":"notactived","pw":"","nickname":"dingaking","devices":[{"os":"ios","deviceToken":"29z6j5c4df46f809505189c4c83fjcgf7f6257e98542d2jt3395kj73","registrationid":""},{"os":"android","deviceToken":"","registrationId":"EXAMPLE-kLMchcX0v3xOxWVhG6TfdBp...KT2TGkvnKyTvLuSpzK_qsHgxVB_UpmcUa7Gl6g3EXAMPLE"}]})</p>
+
+                <h2>Collection 삭제</h2>
+                <p>> show collections</p>
+                <p>> db.user.drop()</p>
+                <p>> show collections</p>
+
+                <h2>Document 삭제</h2>
+                <p>> db.user.find()</p>
+                <p>> db.user.remove({"nickname": "dingaking"})</p>
+                <p>> db.user.find()</p>
+                <p>> db.user.remove({})</p>
+                <p>> db.user.find()</p>
+                <p>> db.user.remove({}, 1)</p>
+
                 <div class="line"></div>
-    
-                <h2>이미지 조회</h2>
-                <p># sudo docker images</p>
-
-                <h2>컨테이너 조회</h2>
-                <p># sudo docker ps -a</p>
-
-                <h2>우분투 최신 이미지 가져오기</h2>
-                <p># sudo docker pull ubuntu:latest</p>
-
-                <h2>컨테이너 생성</h2>
-                <p># sudo docker run -i -t --name container-name ubuntu:latest /bin/bash</p>
                 
-                <h2>컨테이너 시작</h2>
-                <p># sudo docker start ubuntu:14.04</p>
 
-                <h2>컨테이너 이름 변경</h2>
-                <p># sudo docker rename hello nodejs</p>
-
-                <h2>시작된 컨테이너에 접속</h2>
-                <p># sudo docker attach nodejs</p>
-
-                <h2>컨테이너 탈출</h2>
-                <p># ctrl + p, ctrl + q</p>
+                <h2>find</h2>
+                <p>> db.user.find({"nickname":"dingaking"})</p>
+                <p>> visits</p>
+                <p>> </p>
+                <p>> </p>
                 
-                <h2>외부에서 컨테이너의 명령을 실행</h2>
-                <p># sudo docker exec nodejs date</p>
-
-                <h2>컨테이너 정지</h2>
-                <p># sudo docker stop nodejs</p>
-
-                <h2>컨테이너 삭제</h2>
-                <p># sudo docker rm nodejs</p>
-
-                <h2>이미지 삭제</h2>
-                <p># sudo docker rmi ubuntu:latest</p>
+                
                 
             </div>
         </div>
