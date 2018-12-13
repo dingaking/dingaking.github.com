@@ -111,7 +111,7 @@ paging(1, 2);
 </pre>
                 </div>
 
-                <h2>set field</h2>
+                <h2>update field</h2>
                 <p>> db.user.update( { visits: 40 }, { $set: { email: "jungtek_whang@hanmail.net" } } )</p>
                 <h2>update document</h2>
                 <p>> db.user.update( { email: "jungtek_whang@hanmail.net" }, { "name": "jungtek_whang", pw: "1234" })</p>
@@ -120,12 +120,12 @@ paging(1, 2);
                 <h2>upsert</h2>
                 <div class="highlight"><pre>
 db.user.update(
-    { email: "80nomi@gmail.com" },
+    { email: "jungtek@dreamwiz.com" },
     {
-        "email": "80nomi@gmail.com",
+        "email": "jungtek@dreamwiz.com",
         "status": "notactived",
         "pw": "",
-        "nickname": "80nomi",
+        "nickname": "jungtek",
         "course": [
             "english",
             "music"],
@@ -210,6 +210,53 @@ db.user.update(
                 <h2>expireAfterSeconds</h2>
                 <p>> db.user.createIndex( { "accessToken": 1 }, { expireAfterSeconds: 3600 } )</p>
 
+                <div class="line"></div>
+
+                <h2>Connect</h2>
+                <div class="highlight"><pre>
+var mongoose = require('mongoose');
+var db = mongoose.connection;
+db.on('error', console.error);
+db.once('open', function(){
+    console.log("Connected to mongod server");
+});
+mongoose.connect('mongodb://localhost:27017/housekeepinglog');
+                </pre></div>
+
+                <h2>Model</h2>
+                <div class="highlight"><pre>
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var userSchema = new Schema({
+    email: String,
+    pw: String,
+    nickname: String,
+    activated: Boolean,
+    created_date: { type: Date, default: Date.now  },
+    recent_date: {type: Date}
+});
+
+module.exports = mongoose.model('user', userSchema);
+                </pre></div>
+
+                
+                <h2>Create</h2>
+                <div class="highlight"><pre>
+var user = User();
+user.email = email;
+user.pw = pw;
+user.nickname = nickname;
+user.activated = false;
+user.save(function(err) {
+    if (err) {
+        console.error(err);
+        return;
+    }
+});            
+                </pre></div>
+
+                        
             </div>
         </div>
     
