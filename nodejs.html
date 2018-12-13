@@ -99,8 +99,8 @@ app.use('/auth', auth);
                 </div>
                 <div class="bd-example">
                         auth.js
-                    </div>
-                    <div class="highlight">
+                </div>
+                <div class="highlight">
 <pre>
 var express = require('express');
 var router = express.Router();
@@ -116,12 +116,27 @@ router.post('/createNotApprovedUser', function(req, res) {
 
 module.exports = router;
 </pre>
-                    </div>
+                </div>
     
                 <h2>PM2</h2>
                 <!-- http://pm2.keymetrics.io -->
                 <p># npm install pm2@latest -g</p>
                 <p># pm2 start app.js</p>
+
+                <h2>cookie</h2>
+                <p># npm install --save cookie-parser</p>
+                <div class="highlight">
+<pre>
+const app = require('express')();
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+app.get('/', (req, res) => {
+    console.log(req.cookies);
+    var email = req.body.email;
+    res.cookie('email', email);
+});
+</pre>
+                </div>
 
             </div>
         </div>
