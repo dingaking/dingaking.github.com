@@ -9,6 +9,7 @@
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <!-- Custom styles for this template -->
         <link href="css/sidebar.css" rel="stylesheet">
+        <link href="css/code-example.css" rel="stylesheet">
 
         <title>Development Diary</title>
     </head>
@@ -53,9 +54,13 @@
 
                 <h2>Document 추가</h2>
 
-                <p>> db.user.insert({"email":"dingaking@gmail.com", "status":"notactived", "pw":"", "nickname":"dingaking"});</p>
-                <p>> db.user.insert({"email":"jungtek.hwang@gmail.com", "status":"notactived", "pw":"", "nickname":"jungtek.hwang"});</p>
-                <p>> db.user.insert({"email":"dingaking@gmail.com","status":"notactived","pw":"","nickname":"dingaking","devices":[{"os":"ios","deviceToken":"29z6j5c4df46f809505189c4c83fjcgf7f6257e98542d2jt3395kj73","registrationid":""},{"os":"android","deviceToken":"","registrationId":"EXAMPLE-kLMchcX0v3xOxWVhG6TfdBp...KT2TGkvnKyTvLuSpzK_qsHgxVB_UpmcUa7Gl6g3EXAMPLE"}]})</p>
+                <div class="highlight">
+<pre>
+db.user.insert({"email":"dingaking@gmail.com", "status":"notactived", "pw":"", "nickname":"dingaking", "course":["english", "math", "music"], "score":{"english":90, "math":95}, "visits":40});
+db.user.insert({"email":"jungtek.hwang@gmail.com", "status":"notactived", "pw":"", "nickname":"jungtek.hwang", "course":["english", "music"], "score":{"english":35, "math":77}, "visits":15});
+db.user.insert({"email":"jungtek_whang@hanmail.net","status":"notactived","pw":"","nickname":"dingaking", "course":["math", "music"], "score":{"english":99, "math":46}, "visits":79,"devices":[{"os":"ios","deviceToken":"29z6j5c4df46f809505189c4c83fjcgf7f6257e98542d2jt3395kj73","registrationid":""},{"os":"android","deviceToken":"","registrationId":"EXAMPLE-kLMchcX0v3xOxWVhG6TfdBp...KT2TGkvnKyTvLuSpzK_qsHgxVB_UpmcUa7Gl6g3EXAMPLE"}]});
+</pre>
+                </div>
 
                 <h2>Collection 삭제</h2>
                 <p>> show collections</p>
@@ -72,15 +77,139 @@
 
                 <div class="line"></div>
                 
-
                 <h2>find</h2>
                 <p>> db.user.find({"nickname":"dingaking"})</p>
-                <p>> visits</p>
-                <p>> </p>
-                <p>> </p>
+                <p>> db.user.find({"visits":{$lte: 30}});</p>
+                <p>> db.user.find({"visits":{$gt: 30, $lt: 70}});</p>
+
+                <h2>$elemMatch</h2>
+                <p>> db.user.find({ "devices": { $elemMatch: { "os": "ios" }}})</p>
+                <p>> db.user.find({ "score.english": {$lt: 50}})</p>
+                <p>> db.user.find({ "course": "english"})</p>
+
+                <h2>projection</h2>
+                <p>> db.user.find( { } , { "_id": false, "email": true, "status": true } )</p>
+                <p>> db.user.find( { } , { "email": true, "status": true } )</p>
+                <p>> db.user.find( { "email": "dingaking@gmail.com" }, { devices: { $slice: 1 } } )</p>
+                <p>> db.user.find({ "devices": { $elemMatch: { "os": "ios" }}}, {"_id": false, "email": true, "status": true, "devices": {$elemMatch: {"os":"ios"}} })</p>
+
+                <h2>sort</h2>
+                <p>> db.user.find().sort( { "visits": 1 } )</p>
+                <p>> db.user.find().sort( { "visits": -1 } )</p>
+                <p>> db.user.find().sort( { "email": -1, "_id": -1 } )</p>
+
+                <h2>limit</h2>
+                <p>> db.user.find().limit(2)</p>
+                <p>> db.user.find().skip(2)</p>
+
+                <div class="highlight">
+<pre>
+var paging = function(page, perPage) {
+    return db.user.find().sort( { "_id": -1 } ).skip((page-1)*perPage).limit(perPage);
+}
+paging(1, 2);
+</pre>
+                </div>
+
+                <h2>set field</h2>
+                <p>> db.user.update( { visits: 40 }, { $set: { email: "jungtek_whang@hanmail.net" } } )</p>
+                <h2>update document</h2>
+                <p>> db.user.update( { email: "jungtek_whang@hanmail.net" }, { "name": "jungtek_whang", pw: "1234" })</p>
+                <h2>remove field</h2>
+                <p>> db.user.update( { email: "jungtek_whang@hanmail.net" }, { $unset: { pw: 1 } } )</p>
+                <h2>upsert</h2>
+                <div class="highlight"><pre>
+db.user.update(
+    { email: "80nomi@gmail.com" },
+    {
+        "email": "80nomi@gmail.com",
+        "status": "notactived",
+        "pw": "",
+        "nickname": "80nomi",
+        "course": [
+            "english",
+            "music"],
+        "score": {
+            "english": 12,
+            "math": 22
+        },
+        "visits": 55
+    },
+    { upsert: true }
+)
+                </pre></div>
+
+                <h2>update multile document</h2>
+                <div class="highlight"><pre>
+db.user.update(
+    { visits: { $gt: 40 } },
+    { $set: { "pw": "none" } },
+    { multi: true }
+)                            
+                </pre></div>
+
+
+                <h2>push</h2>
+                <div class="highlight"><pre>
+db.user.update(
+    { email: "jungtek_whang@hanmail.net" },
+    { $push: { course: "programming" } }
+)
+                </pre></div>
+
+                <h2>push & sort</h2>
+                <div class="highlight"><pre>
+db.user.update(
+    { email: "jungtek_whang@hanmail.net" },
+    {
+        $push: {
+            course: {
+                $each: ["history", "driving"],
+                $sort: 1
+            }
+        }
+    }
+)
+                </pre></div>
+
+                <h2>remove from array</h2>
+                <div class="highlight"><pre>
+db.user.update(
+    { email: "jungtek_whang@hanmail.net" },
+    {
+        $pull: { course: "math" }
+    }
+)
+                </pre></div>
+
+                <h2>remove from array(multile)</h2>
+                <div class="highlight"><pre>
+db.user.update(
+    { email: "dingaking@gmail.com" },
+    {
+        $pull: { course: { $in: ["math", "music"] } }
+    }
+)
+                </pre></div>
+
+                <div class="line"></div>
+
+                <h2>Index</h2>
+                <p>> db.user.createIndex({email: 1})</p>
+                <p>> db.user.createIndex({visits: 1, email: -1})</p>
                 
-                
-                
+                <h2>partialFilterExpression</h2>
+                <p>> db.user.createIndex({visits: 1}, {partialFilterExpression: {visits: {$gt: 50}}})</p>
+
+                <h2>getIndexes</h2>
+                <p>> db.user.getIndexes()</p>
+
+                <h2>dropIndex</h2>
+                <p>> db.user.dropIndex({email: 1})</p>
+
+                <h2>expireAfterSeconds</h2>
+                <p>> db.user.createIndex( { "accessToken": 1 }, { expireAfterSeconds: 3600 } )</p>
+
             </div>
         </div>
     
