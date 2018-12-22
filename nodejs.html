@@ -66,15 +66,12 @@
                 <h2>Ubuntu 몽고DB 설치</h2>
                 <p># sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4</p>
                 <p># echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list</p>
-                <p># sudo cd /usr/lib/apt/methods</p>
+                <p># cd /usr/lib/apt/methods</p>
                 <p># sudo ln -s http https</p>
                 <p># sudo apt-get update</p>
                 <p># sudo apt-get install -y mongodb-org</p>
-                <p># sudo apt-get install mongodb</p>
                 <p># sudo mkdir -p /data/db</p>
-                <p># service mongodb status</p>
-                <p># sudo service mongodb start</p>
-                <p># service mongodb status</p>
+                <p># sudo mongo &</p>
                 <p># mongo --version</p>
                 <p># mongo</p>
                 <p>> show dbs</p>

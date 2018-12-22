@@ -46,10 +46,14 @@
                     </div>
                 </nav>
     
-                <h2>설치</h2>
+                <h2>설치(curl)</h2>
                 <p># curl -fsSL https://get.docker.com/ | sudo sh</p>
                 <p># docker version</p>
-    
+
+                <h2>설치(yum)</h2>
+                <p># yum -y install docker-io</p>
+                <p># docker version</p>
+
                 <div class="line"></div>
     
                 <h2>이미지 조회</h2>
@@ -62,7 +66,10 @@
                 <p># sudo docker pull ubuntu:latest</p>
 
                 <h2>컨테이너 생성</h2>
-                <p># sudo docker run -i -t --name container-name ubuntu:latest /bin/bash</p>
+                <p># sudo docker run -it --name nodejs ubuntu:14.04 /bin/bash</p>
+
+                <h2>컨테이너 생성(포트연결)</h2>
+                <p># sudo docker run -it -p 3000:3000 --name nodejs ubuntu:14.04 /bin/bash</p>
                 
                 <h2>컨테이너 시작</h2>
                 <p># sudo docker start ubuntu:14.04</p>

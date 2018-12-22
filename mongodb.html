@@ -256,7 +256,7 @@ user.save(function(err) {
 });            
                 </pre></div>
 
-                <h2>GET</h2>
+                <h2>GET:findOne</h2>
                 <div class="highlight"><pre>
 var User = require('model/user');
 User.findOne({email:email}, function (err, user) {
@@ -266,7 +266,7 @@ User.findOne({email:email}, function (err, user) {
 });
                 </pre></div>
 
-                <h2>findById</h2>
+                <h2>GET:findById</h2>
                 <div class="highlight"><pre>
 var User = require('model/user');
 User.findById(userID, function (err, user) {
@@ -276,7 +276,7 @@ User.findById(userID, function (err, user) {
 });
                 </pre></div>
 
-                <h2>findById & update</h2>
+                <h2>GET:findById & update</h2>
                 <div class="highlight"><pre>
 var User = require('model/user');
 User.findById(userID, function (err, user) {
@@ -289,6 +289,16 @@ User.findById(userID, function (err, user) {
         if (err) console.err(err);
         console.log(user);
     });
+});
+                </pre></div>
+                        
+                <h2>GET:find, projection</h2>
+                <div class="highlight"><pre>
+var User = require('model/user');
+User.find({userID: req.params.userID}, {_id: 0, nickname: 1, created_date: 1}, function(err, user));
+    if(err) return res.status(500).json({error: err});
+    if(user.length === 0) return res.status(404).json({error: 'user not found'});
+    res.json(user);
 });
                 </pre></div>
                         
