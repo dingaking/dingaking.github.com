@@ -50,6 +50,99 @@
                     </div>
                 </nav>
     
+                <h2>NodeMailer</h2>
+                <div class="highlight">
+<pre>
+mkdir NodeMailer
+cd !$
+npm install nodemailer
+npm install express
+npm install ejs
+npm install body-parser
+mkdir views
+node app.js
+</pre>
+                </div>
+                <div class="bd-example">
+                    mailform.ejs(vi views/mailform.ejs)
+                </div>
+                <div class="highlight">
+<pre><code>
+&lt!DOCTYPE html&gt
+&lthtml&gt
+    &ltbody&gt
+        &ltform action="/sendMailByNodeMailer" method="post"&gt
+            &ltinput type="text" name="useremail"&gt
+            &ltinput type="password" name="userpwd"&gt
+            &ltinput type="submit" value="가입"&gt
+        &lt/form&gt
+    &lt/body&gt
+&lt/html&gt
+</code></pre>
+                </div>
+                <div class="bd-example">
+                        router.js(vi router.js)
+                </div>
+                <div class="highlight">
+<pre><code>
+var express = require('express');
+var router = express.Router();
+var nodemailer = require('nodemailer');
+
+router.post("/sendMailByNodeMailer", function(req, res, next) {
+    var email = req.body.useremail;
+
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'youremail@gmail.com',
+            pass: 'yourpassword'
+        }
+    });
+
+    var mailOptions = {
+        from: 'youremail@gmail.com',
+        to: email,
+        subject: 'Sending Email using Node.js',
+        text: 'That was easy!'
+    };
+
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
+})
+
+module.exports = router;
+</code></pre>
+                </div>
+                <div class="bd-example">
+                    app.js(vi app.js)
+                </div>
+                <div class="highlight">
+<pre><code>
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+var router = require('./router')
+app.use('/', router)
+
+app.listen(3000, function() {
+    console.log('listening on port 3000!');
+});
+</code></pre>
+                </div>
+
+                            
                 <h2>CentOS 몽고DB 설치</h2>
                 <p># yum install mongodb mongodb-server</p>
                 <p># service mongod status</p>
