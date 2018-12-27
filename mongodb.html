@@ -64,7 +64,26 @@ db.users.insert({"email":"jungtek.hwang@gmail.com", "status":"notactived", "pw":
 db.users.insert({"email":"jungtek_whang@hanmail.net","status":"notactived","pw":"","nickname":"dingaking", "course":["math", "music"], "score":{"english":99, "math":46}, "visits":79,"devices":[{"os":"ios","deviceToken":"29z6j5c4df46f809505189c4c83fjcgf7f6257e98542d2jt3395kj73","registrationid":""},{"os":"android","deviceToken":"","registrationId":"EXAMPLE-kLMchcX0v3xOxWVhG6TfdBp...KT2TGkvnKyTvLuSpzK_qsHgxVB_UpmcUa7Gl6g3EXAMPLE"}]});
 </pre>
                 </div>
+                <div class="highlight"><pre>
+var user = User();
+user.email = email;
+user.pw = pw;
+user.nickname = nickname;
+user.activated = false;
+user.save(function(err) {
+    if (err) {
+        isSuccess = false;
+        console.error(err);
+        res.render('join_result', {
+            title : '데이터베이스 오류',
+            isSuccess: isSuccess
+        });
+        return;
+    }
 
+    res.json({result: success})
+}</pre>
+                </div>
                 <h2>Collection 삭제</h2>
                 <p>> show collections</p>
                 <p>> db.users.drop()</p>
@@ -84,6 +103,40 @@ db.users.insert({"email":"jungtek_whang@hanmail.net","status":"notactived","pw":
                 <p>> db.users.find({"nickname":"dingaking"})</p>
                 <p>> db.users.find({"visits":{$lte: 30}});</p>
                 <p>> db.users.find({"visits":{$gt: 30, $lt: 70}});</p>
+
+                <h2>find timeout</h2>
+                <div class="highlight"><pre>
+db.accesstokens.find({
+    created_date: {
+        $gt: new Date(
+            new Date().setMinutes(
+                new Date().getMinutes()-5
+            )
+        )
+    }
+})          
+                </pre></div>
+
+                <h2>find mongoose</h2>
+                <div class="highlight"><pre>
+Capital.find({userid: userid}, {name: 1}, function(err, capital) {
+    if (err) {
+        res.json({
+            result: 'fail',
+            msg: "database error"
+        })
+        return
+    }
+
+    res.json({
+        result: 'success',
+        data: capital
+    })
+})
+                </pre></div>
+
+
+
 
                 <h2>$elemMatch</h2>
                 <p>> db.users.find({ "devices": { $elemMatch: { "os": "ios" }}})</p>
@@ -116,6 +169,24 @@ paging(1, 2);
 
                 <h2>update field</h2>
                 <p>> db.users.update( { visits: 40 }, { $set: { email: "jungtek_whang@hanmail.net" } } )</p>
+                <div class="highlight">
+                    <pre>
+AccessToken.updateOne({
+    _id: accessToken[0]._id
+}, {
+    $set: {
+        created_date: new Date()
+    }
+}, function(err, result) {
+    if (err) {
+        console.error('update error ', err)
+        return
+    }
+    console.log('update 성공', result)
+})
+                    </pre>
+                </div>
+                    
                 <h2>update document</h2>
                 <p>> db.users.update( { email: "jungtek_whang@hanmail.net" }, { "name": "jungtek_whang", pw: "1234" })</p>
                 <h2>remove field</h2>
