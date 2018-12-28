@@ -14,3 +14,7 @@
     background-color: #eaeaf1;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
+
+.highlight pre{
+    margin-bottom: 0;
+}
