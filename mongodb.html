@@ -99,6 +99,28 @@ user.save(function(err) {
                 <p>> db.users.remove({})</p>
                 <p>> db.users.find()</p>
                 <p>> db.users.remove({}, 1)</p>
+                <div class="highlight"><pre>
+User.deleteOne({
+    _id: userid
+}, function(err) {
+    if (err) {
+        console.err(err)
+        return
+    }
+})</pre>
+                </div>
+                <div class="highlight"><pre>
+User.deleteMany({
+    visits: {
+        $gt: 5
+    }
+}, function(err) {
+    if (err) {
+        console.err(err)
+        return
+    }
+})</pre>
+                </div>
 
                 <div class="line"></div>
                 
