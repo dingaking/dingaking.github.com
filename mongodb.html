@@ -206,6 +206,27 @@ paging(1, 2);
 </pre>
                 </div>
 
+                <h2>limit mongoose(paging)</h2>
+                <div class="highlight">
+<pre>
+var perPage = 5
+
+Transaction.find({
+    userid: userid
+}).
+limit(perPage).
+skip(perPage * page).
+sort({
+    cdate: -1
+}).
+populate("category").        
+populate("capital").        
+exec(function(err, transaction) {
+
+})        
+</pre>
+                </div>
+
                 <h2>update field</h2>
                 <p>> db.users.update( { visits: 40 }, { $set: { email: "jungtek_whang@hanmail.net" } } )</p>
                 <div class="highlight">
