@@ -179,6 +179,20 @@ Capital.find({userid: userid}, {name: 1}, function(err, capital) {
                 <p>> db.users.find().sort( { "visits": -1 } )</p>
                 <p>> db.users.find().sort( { "email": -1, "_id": -1 } )</p>
 
+                <h2>sort mongoose</h2>
+                <div class="highlight">
+<pre>
+Transaction.find({
+    category:categoryid
+}).sort({
+    field : criteria
+}).exec(function(err, transaction){
+
+});
+</pre>
+criteria : asc, desc, ascending, descending, 1, -1
+                </div>
+
                 <h2>limit</h2>
                 <p>> db.users.find().limit(2)</p>
                 <p>> db.users.find().skip(2)</p>
