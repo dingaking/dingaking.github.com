@@ -65,6 +65,12 @@ mkdir /var/backups/mongobackups
 mongodump --db housekeepinglog --out /var/backups/mongobackups/`date +"%y-%m-%d_%H:%M:%S"`</pre>
                 </div>
 
+                <h2>mongorestore(복구)</h2>
+                <div class="highlight">
+<pre>
+mongorestore -h 127.0.0.1 --db housekeepinglog ~/work/dinga.kr.nodejs/19-01-07_06:12:47/housekeepinglog</pre>
+                </div>
+
 
 
                 <h2>Document 추가</h2>
