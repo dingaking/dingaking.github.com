@@ -62,10 +62,54 @@
 
                 <div class="highlight">
 <pre>
-db.users.insert({"email":"dingaking@gmail.com", "status":"notactived", "pw":"", "nickname":"dingaking", "course":["english", "math", "music"], "score":{"english":90, "math":95}, "visits":40});
-db.users.insert({"email":"jungtek.hwang@gmail.com", "status":"notactived", "pw":"", "nickname":"jungtek.hwang", "course":["english", "music"], "score":{"english":35, "math":77}, "visits":15});
-db.users.insert({"email":"jungtek_whang@hanmail.net","status":"notactived","pw":"","nickname":"dingaking", "course":["math", "music"], "score":{"english":99, "math":46}, "visits":79,"devices":[{"os":"ios","deviceToken":"29z6j5c4df46f809505189c4c83fjcgf7f6257e98542d2jt3395kj73","registrationid":""},{"os":"android","deviceToken":"","registrationId":"EXAMPLE-kLMchcX0v3xOxWVhG6TfdBp...KT2TGkvnKyTvLuSpzK_qsHgxVB_UpmcUa7Gl6g3EXAMPLE"}]});
-</pre>
+db.users.insert({
+    "email": "dingaking@gmail.com",
+    "status": "notactived",
+    "pw": "",
+    "nickname": "dingaking",
+    "course": ["english", "math", "music"],
+    "score": {
+        "english": 90,
+        "math": 95
+    },
+    "visits": 40
+});
+
+db.users.insert({
+    "email": "jungtek.hwang@gmail.com",
+    "status": "notactived",
+    "pw": "",
+    "nickname": "jungtek.hwang",
+    "course": ["english", "music"],
+    "score": {
+        "english": 35,
+        "math": 77
+    },
+    "visits": 15
+});
+
+db.users.insert({
+    "email": "jungtek_whang@hanmail.net",
+    "status": "notactived",
+    "pw": "",
+    "nickname": "dingaking",
+    "course": ["math", "music"],
+    "score": {
+        "english": 99,
+        "math": 46
+    },
+    "visits": 79,
+    "devices": [{
+        "os": "ios",
+        "deviceToken": "29z6j5c4df46f809505189c4c83fjcgf7f6257e98542d2jt3395kj73",
+        "registrationid": ""
+    },
+    {
+        "os": "android",
+        "deviceToken": "",
+        "registrationId": "EXAMPLE-kLMchcX0v3xOxWVhG6TfdBp...KT2TGkvnKyTvLuSpzK_qsHgxVB_UpmcUa7Gl6g3EXAMPLE"
+    }]
+});</pre>
                 </div>
                 <div class="highlight"><pre>
 var user = User();
