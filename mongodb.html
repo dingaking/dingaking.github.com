@@ -157,10 +157,111 @@ Capital.find({userid: userid}, {name: 1}, function(err, capital) {
         result: 'success',
         data: capital
     })
+})</pre></div>
+
+                <h2>join console</h2>
+                <div class="highlight">
+<pre>db.transactions.aggregate([{
+    $lookup: {
+        from: 'categories',
+        localField: 'category',
+        foreignField: '_id',
+        as: 'category'
+    }
+}, {
+    $lookup: {
+        from: 'capitals',
+        localField: 'capital',
+        foreignField: '_id',
+        as: 'capital'
+    }
+}])</pre></div>
+
+                <h2>join mongoose</h2>
+                <div class="bd-example">
+                    router.js(router)
+                </div>
+                <div class="highlight">
+<pre>var perPage = 5
+
+Transaction.find({
+    userid: userid
+}).
+limit(perPage).
+skip(perPage * page).
+sort({
+    cdate: -1
+}).
+populate("category").
+populate("capital").
+exec(function(err, transaction) {
+    if (err) {
+        res.json({
+            result: 'fail',
+            msg: "database error"
+        })
+        return
+    }
+
+    res.json({
+        result: 'success',
+        data: transaction
+    })
+})</pre>
+                </div>
+
+                <div class="bd-example">
+                    transaction.js(model)
+                </div>
+                <div class="highlight">
+<pre>
+var mongoose = require('mongoose')
+var Schema = mongoose.Schema
+
+var transactionSchema = new Schema({
+    userid: String,
+    amount: Number,
+    cdate: Date,
+    comment: String,
+    category: {type: mongoose.Schema.Types.ObjectId, ref: 'category'},
+    capital: {type: mongoose.Schema.Types.ObjectId, ref: 'capital'}
 })
-                </pre></div>
 
+module.exports = mongoose.model('transaction', transactionSchema)
+</pre></div>
 
+                <div class="bd-example">
+                    category.js(model)
+                </div>
+                <div class="highlight">
+<pre>
+var mongoose = require('mongoose')
+var Schema = mongoose.Schema
+
+var categorySchema = new Schema({
+    userid: String,
+    name: String,
+    isInput: Boolean
+})
+
+module.exports = mongoose.model('category', categorySchema)
+</pre></div>
+
+                <div class="bd-example">
+                    capital.js(model)
+                </div>
+                <div class="highlight">
+<pre>
+var mongoose = require('mongoose')
+var Schema = mongoose.Schema
+
+var capitalSchema = new Schema({
+    userid: String,
+    name: String
+})
+
+module.exports = mongoose.model('capital', capitalSchema)
+</pre></div>
 
 
                 <h2>$elemMatch</h2>
@@ -433,8 +534,7 @@ User.find({userID: req.params.userID}, {_id: 0, nickname: 1, created_date: 1}, f
     if(err) return res.status(500).json({error: err});
     if(user.length === 0) return res.status(404).json({error: 'user not found'});
     res.json(user);
-});
-                </pre></div>
+});</pre></div>
                         
             </div>
         </div>
