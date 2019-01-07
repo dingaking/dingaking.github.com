@@ -221,6 +221,29 @@ Capital.find({userid: userid}, {name: 1}, function(err, capital) {
     }
 }])</pre></div>
 
+                <h2>join console(projection)</h2>
+                <div class="highlight">
+<pre>db.transactions.aggregate([{
+    $project: {
+        name: 1,
+        category: 1,
+        capital: 1
+    }
+},{
+    $lookup: {
+        from: 'categories',
+        localField: 'category',
+        foreignField: '_id',
+        as: 'category'
+    }
+}, {
+    $lookup: {
+        from: 'capitals',
+        localField: 'capital',
+        foreignField: '_id',
+        as: 'capital'
+    }
+}])</pre></div>
                 <h2>join mongoose</h2>
                 <div class="bd-example">
                     router.js(router)
