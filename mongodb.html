@@ -58,8 +58,16 @@
                 <p>> use db_name</p>
                 <p>> db.dropDatabase();</p>
 
-                <h2>Document 추가</h2>
+                <h2>mongodump(백업)</h2>
+                <div class="highlight">
+<pre>
+mkdir /var/backups/mongobackups
+mongodump --db housekeepinglog --out /var/backups/mongobackups/`date +"%y-%m-%d_%H:%M:%S"`</pre>
+                </div>
 
+
+
+                <h2>Document 추가</h2>
                 <div class="highlight">
 <pre>
 db.users.insert({
