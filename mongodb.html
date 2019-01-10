@@ -697,6 +697,55 @@ db.transactions.aggregate([{
 }])</pre>
                 </div>
 
+                <h2>group by count, sum & lookup(mongoose)</h2>
+                <div class="highlight"><pre>
+Transaction.aggregate([{
+    $group: {
+        _id: {
+            capitalid: '$capital'
+        },
+        count: {
+            $sum: 1
+        },
+        sum: {
+            $sum: '$amount'
+        }
+    }
+}, {
+    $lookup: {
+        from: 'capitals',
+        localField: '_id.capitalid',
+        foreignField: '_id',
+        as : 'capitalids'
+    }
+}], function(err, res) {
+    if (err) {
+        console.error(err)
+        return
+    }
+    console.log(res)
+})</pre>
+                </div>
+                <div class="highlight"><pre>
+[ { _id: { capitalid: 5c2434458d00a00168a1529d },
+    count: 2,
+    sum: 7109585,
+    capitalids:
+     [ { _id: 5c2434458d00a00168a1529d,
+         userid: '5c1367ab63cf290dbd04dd17',
+         name: '농협.월급',
+         __v: 0 } ] },
+  { _id: { capitalid: 5c1f7b6d7ac842011952e27c },
+    count: 16,
+    sum: -80750,
+    capitalids:
+     [ { _id: 5c1f7b6d7ac842011952e27c,
+         userid: '5c1367ab63cf290dbd04dd17',
+         name: '신한입출',
+         __v: 0 } ] } ]
+
+</pre>
+                </div>
 
             </div>
         </div>
