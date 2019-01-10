@@ -616,7 +616,41 @@ User.find({userID: req.params.userID}, {_id: 0, nickname: 1, created_date: 1}, f
     if(user.length === 0) return res.status(404).json({error: 'user not found'});
     res.json(user);
 });</pre></div>
-                        
+             
+
+                <div class="line"></div>
+                                
+                <h2>group by count(console)</h2>
+                <div class="highlight"><pre>
+db.transactions.aggregate([{
+    $group: {
+        _id: "$capital",
+        num_count: {
+            $sum: 1
+        }
+    }
+}])</pre>
+                </div>
+                
+                <h2>group by count(mongoose)</h2>
+                <div class="highlight"><pre>
+Transaction.aggregate({ 
+    $group: { 
+        _id: '$capital', 
+        total_products: {
+            $sum: 1
+        }
+    } 
+}, function (err, res) {
+    if (err) {
+        console.err(err);
+        return
+    }
+    console.log(res);
+});</pre></div>
+
+
+
             </div>
         </div>
     
