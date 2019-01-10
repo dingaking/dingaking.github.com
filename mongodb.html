@@ -676,6 +676,27 @@ db.transactions.aggregate([{
 }])</pre>
                 </div>
 
+                <h2>group by count & lookup(console)</h2>
+                <div class="highlight"><pre>
+db.transactions.aggregate([{
+    $group: {
+        _id: {
+            capital: "$capital",
+        },
+        count: {
+            $sum:1
+        }
+    }
+}, {
+    $lookup: {
+        from: 'capitals',
+        localField: '_id.capital',
+        foreignField: '_id',
+        as: 'capital'
+    }
+}])</pre>
+                </div>
+
 
             </div>
         </div>
