@@ -619,7 +619,7 @@ User.find({userID: req.params.userID}, {_id: 0, nickname: 1, created_date: 1}, f
              
 
                 <div class="line"></div>
-                                
+
                 <h2>group by count(console)</h2>
                 <div class="highlight"><pre>
 db.transactions.aggregate([{
@@ -649,6 +649,32 @@ Transaction.aggregate({
     console.log(res);
 });</pre></div>
 
+                <h2>group by sum(console)</h2>
+                <div class="highlight"><pre>
+db.transactions.aggregate([{
+    $group: {
+        _id: "$capital",
+        total_amount: {
+            $sum: "$amount"
+        }
+    }
+}])</pre>
+                </div>
+
+                <h2>group by count & sum(console)</h2>
+                <div class="highlight"><pre>
+db.transactions.aggregate([{
+    $group: {
+        _id: "$capital",
+        count: {
+            $sum: 1
+        },
+        sum: {
+            $sum: "$amount"
+        }
+    }
+}])</pre>
+                </div>
 
 
             </div>
