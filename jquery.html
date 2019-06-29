@@ -59,6 +59,13 @@
 $(elem).attr("attributeName")
 </pre>
                 </div>
+                <h2>disabled true/false</h2>
+                <div class="highlight">
+<pre>
+$(elem).attr('disabled', true)
+$(elem).attr('disabled', false)
+</pre>
+                </div>
 
                 <h2>set checkbox checked</h2>
                 <div class="highlight">
@@ -71,6 +78,51 @@ $(elem).prop('checked', true);
                 <div class="highlight">
 <pre>
 $('#radio_elem').is(':checked')
+</pre>
+                </div>
+
+                <h2>get value in radio</h2>
+                <div class="highlight">
+<pre>
+$('input:radio[name=radio-name]').val()
+</pre>
+                </div>
+
+                <h2>get checked value in radio</h2>
+                <div class="highlight">
+<pre>
+$('input:radio[name=radio-name]:checked').val()
+</pre>
+                </div>
+
+                <h2>name selector</h2>
+                <div class="highlight">
+<pre>
+$("input[name=fieldname]")
+</pre>
+                </div>
+
+                <h2>select radio</h2>
+                <div class="highlight">
+<pre>
+$("input:radio[name=fieldname]")
+</pre>
+                </div>
+
+                <h2>Prevent BODY from scrolling when a modal is opened</h2>
+                <div class="highlight">
+<pre>
+$("#myModal").on("show", function () {
+  $("body").addClass("modal-open");
+}).on("hidden", function () {
+  $("body").removeClass("modal-open")
+});
+
+$('#historyEditModal').modal().on('shown', function(){
+    $('body').css('overflow', 'hidden');
+}).on('hidden', function(){
+    $('body').css('overflow', 'auto');
+})
 </pre>
                 </div>
 
