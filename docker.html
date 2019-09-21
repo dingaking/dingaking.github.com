@@ -80,6 +80,7 @@
                 <h2>컨테이너 생성(포트연결)</h2>
                 <p># sudo docker run -it -p 3000:3000 --name nodejs ubuntu:14.04 /bin/bash</p>
                 <p># sudo docker run -it -p 3000-3010:3000-3010/tcp --name nodejs ubuntu:14.04 /bin/bash</p>
+                <p># sudo docker run -it -p 3000-3020:3000-3020/tcp --name nodejs --link mysql nodejs-dinga.kr /bin/bash</p>
                 
                 <h2>컨테이너 시작</h2>
                 <p># sudo docker start ubuntu:14.04</p>
